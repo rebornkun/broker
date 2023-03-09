@@ -1,17 +1,20 @@
 import React, { useEffect } from "react";
-import img from "../../Assets/img (15).jpg";
+import img from "../../Assets/img/1 (1).jpg";
+import img2 from "../../Assets/img/1 (2).jpg";
+import img3 from "../../Assets/img/1 (3).jpg";
+import img4 from "../../Assets/img/2.jpg";
 // import glow from "../../Assets/glow.svg";
 // import gradient from "../../Assets/Gradients.svg";
 import "./About.css";
 import Footer from "../../Components//Footer/Footer";
 
-export default function About({revealAnimation}) {
+export default function About({ revealAnimation }) {
 
-  useEffect(()=>{
+  useEffect(() => {
     window.addEventListener("scroll", revealAnimation);
-    return window.removeEventListener("scroll", revealAnimation); 
-  },[])
-  
+    return window.removeEventListener("scroll", revealAnimation);
+  }, [])
+
   return (
     <div className="about">
       <div className="about_section mnbground about-uppersection">
@@ -160,9 +163,9 @@ export default function About({revealAnimation}) {
             <h1>What Drives Us</h1>
             <div className="about_third_p_scroll">
               <p>
-              Our mission is to act as a catalyst for universal adoption and blockchain innovation. We focus only on investing in cryptocurrency . Our team has experience in both traditional financing and emerging mining technology. We invest, among others, in cryptocurrencies such as BTC, XRP, ETC, and ETH. We also give a chance to new, dynamically developing ICO projects that bring huge profits in an amazingly short time.
-              Our team consists only of qualified people connected with the financial industry for years, who are also passionate about the fledgling but very strong cryptocurrency market and mining technology. They constantly monitor the market to provide you - our investors with even greater profits. Having strong relationships with the most promising entrepreneurs and other leading investors in the industry, Xtb trade implements an investment strategy, building a diversified portfolio and adjusting the added value to its portfolio companies.
-              Xtb Trades uses advanced investment techniques, such as financial leverage, guarantees huge profits even at the currently fluctuating rate of cryptocurrencies, forex and stocks. When starting cooperation with us you have a 100% guarantee that you will not lose your funds, but you can only gain.
+                Our mission is to act as a catalyst for universal adoption and blockchain innovation. We focus only on investing in cryptocurrency . Our team has experience in both traditional financing and emerging mining technology. We invest, among others, in cryptocurrencies such as BTC, XRP, ETC, and ETH. We also give a chance to new, dynamically developing ICO projects that bring huge profits in an amazingly short time.
+                Our team consists only of qualified people connected with the financial industry for years, who are also passionate about the fledgling but very strong cryptocurrency market and mining technology. They constantly monitor the market to provide you - our investors with even greater profits. Having strong relationships with the most promising entrepreneurs and other leading investors in the industry, Xtb trade implements an investment strategy, building a diversified portfolio and adjusting the added value to its portfolio companies.
+                Xtb Trades uses advanced investment techniques, such as financial leverage, guarantees huge profits even at the currently fluctuating rate of cryptocurrencies, forex and stocks. When starting cooperation with us you have a 100% guarantee that you will not lose your funds, but you can only gain.
               </p>
             </div>
           </div>
@@ -177,62 +180,33 @@ export default function About({revealAnimation}) {
               <div className="left">
                 {" "}
                 <div className="person reveal fade-right">
-                  <img src={img} alt="p" />
+                  <img src={img} alt="p" style={{ aspectRatio: "1" }} />
                   <div className="info">
-                    <h4>Oluyoh Okiemute</h4>
-                    <p>Isekai Protagonist</p>
+                    <h4>tom jackson</h4>
+                    <p>CEO</p>
                   </div>
                 </div>
                 <div className="person reveal fade-right">
-                  <img src={img} alt="p" />
+                  <img src={img2} alt="p" style={{ aspectRatio: "1" }} />
                   <div className="info">
-                    <h4>Raji .M. Muzzammil</h4>
-                    <p>Giga Chad</p>
-                    {/* Full-Stack Dev and AI-Specialist */}
-                  </div>
-                </div>
-                <div className="person reveal fade-right">
-                  <img src={img} alt="p" />
-                  <div className="info">
-                    <h4>Marnin Audu</h4>
-                    <p>Front-End Dev</p>
-                  </div>
-                </div>
-                <div className="person reveal fade-right">
-                  <img src={img} alt="p" />
-                  <div className="info">
-                    <h4>Otti Ken</h4>
-                    <p>Front-End Dev</p>
+                    <h4>chloe sanders</h4>
+                    <p>Admin Lead</p>
                   </div>
                 </div>
               </div>
               <div className="right">
-                <div className="person  reveal fade-right">
-                  <img src={img} alt="p" />
+                <div className="person reveal fade-right">
+                  <img src={img3} alt="p" style={{ aspectRatio: "1" }} />
                   <div className="info">
-                    <h4>Karina Peretei</h4>
-                    <p>Meme Master</p>
+                    <h4>Jack hunter</h4>
+                    <p>CTO</p>
                   </div>
                 </div>
                 <div className="person reveal fade-right">
-                  <img src={img} alt="p" />
+                  <img src={img4} alt="p" style={{ aspectRatio: "1" }} />
                   <div className="info">
-                    <h4>Adedoyin fabian</h4>
-                    <p>Graphics Desginer and Artist(2D/3D)</p>
-                  </div>
-                </div>
-                <div className="person reveal fade-right">
-                  <img src={img} alt="p" />
-                  <div className="info">
-                    <h4>Aliyu .I. Musa</h4>
-                    <p>UI/UX Designer</p>
-                  </div>
-                </div>
-                <div className="person reveal fade-right">
-                  <img src={img} alt="p" />
-                  <div className="info">
-                    <h4>Tyrone Ayomide</h4>
-                    <p>Front-End Dev</p>
+                    <h4>Tobi toni</h4>
+                    <p>Chief financial officer</p>
                   </div>
                 </div>
               </div>
