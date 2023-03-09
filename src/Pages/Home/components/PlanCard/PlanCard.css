@@ -1,0 +1,90 @@
+.plancard_con{
+    height: 350px;
+    min-width: 250px;
+    /* flex: 1 1 100%; */
+    /* max-width: 25%; */
+    background-color: var(--tin-white);
+    border-radius: 30px;
+    overflow: hidden;
+    transition: all 0.5s ease;
+    border: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    
+}
+.plancard_con:hover{
+    transition: all 0.5s ease;
+    animation: changeshadowCol 1s linear 0s infinite;
+    transform: scale(1.03);
+}
+.plancard_con .header{
+    transition: all 0.5s ease;
+    height: 15%;
+    background-color: brown;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.plancard_con .header h5{
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    margin-top: 0px;
+}
+.plancard_con h5{
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: black;
+    margin-top: 40px;
+}
+.plancard_con .contt{
+    gap: 0.8rem;
+}
+.plancard_con .underline{
+    /* border: 0.1px solid grey; */
+    width: 80%;
+    height: 1px;
+    background-color: grey;
+}
+.plancard_con .underlinec{
+    width: 100%;
+    height: 4px;
+    animation: changedivCol 1s linear 0s infinite;
+    margin-bottom: 0px;
+}
+
+@keyframes changeshadowCol {
+    0%, 100% {
+        box-shadow: 0px 0px 20px 2px var(--chill-green);
+    }
+    25%{
+        box-shadow: 0px 0px 20px 2px var(--rebbon-blue);
+    }
+    50%{
+        box-shadow: 0px 0px 20px 2px var(--yellow);   
+    }
+    75%{
+        box-shadow: 0px 0px 20px 2px var(--peal);   
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .plancard_con{
+        height: 500px;
+        min-width: 100%;
+        /* flex: 1 1 100%; */
+        /* max-width: 25%; */
+        
+    }
+    .plancard_con .header h5{
+        font-size: 2rem;
+    }
+
+    .plancard_con h5{
+        margin-top: 60px;
+    }
+}

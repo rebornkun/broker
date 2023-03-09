@@ -1,0 +1,474 @@
+.navbar {
+  width: 100%;
+  margin: auto;
+  /* background: var(--midnight); */
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+.navbar.colored {
+  background: var(--midnight);
+  transition: all 0.3s ease;
+}
+
+.dontShowNav {
+  transform: translateY(-100%);
+}
+
+.container {
+  height: 100%;
+  max-width: 1440px;
+  width: 100%;
+  padding: 0px 120px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  align-self: center;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.logo {
+  height: fit-content;
+  width: fit-content;
+  cursor: pointer;
+  display: flex;
+
+  align-items: center;
+  z-index: 4;
+}
+.logo svg path {
+  stroke-dasharray: 300;
+
+  stroke-dashoffset: 0;
+  animation: logoanimate 1.4s linear infinite alternate;
+  transition: all 0.3s ease-in-out;
+  animation-delay: 0.3s;
+}
+
+@keyframes logoanimate {
+  to {
+    stroke-dashoffset: 600;
+  }
+}
+
+.navloading {
+  height: 20px;
+  width: fit-content;
+  display: flex;
+  align-content: flex-end;
+}
+
+.navloading h1 {
+  font-size: 18px;
+  color: var(--tin-white);
+  align-self: center;
+}
+
+.nav_items {
+  width: 70%;
+  transition: all 0.3s ease;
+}
+
+.nav_things {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.nav_items_list_container {
+  width: 100%;
+  align-self: center;
+}
+
+.nav_item_list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 0px 30px;
+  align-items: center;
+}
+
+.nav_item_list a li {
+  color: var(--tin-white);
+  font-weight: 500;
+  padding-bottom: 3px;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+}
+.nav_item_list a.active li {
+  border-bottom: 2px solid var(--tin-white);
+  transition: all 0.5s ease-in-out;
+  animation: changeCol 1.5s linear infinite, changeBoCol 1.5s linear infinite;
+}
+.nav_item_list li.active {
+  border-bottom: 2px solid var(--tin-white);
+  transition: all 0.5s ease-in-out;
+  animation: changeCol 1.5s linear infinite, changeBoCol 1.5s linear infinite;
+}
+.nav_item_list li:hover {
+  transition: all 0.3s ease-in-out;
+  animation: changeCol 1.5s linear infinite, changeBoCol 1.5s linear infinite;
+}
+
+@keyframes changeBoCol {
+  0%,
+  100% {
+    border-bottom-color: var(--peal);
+  }
+  50% {
+    border-bottom-color: var(--chill-green);
+  }
+}
+@keyframes changeCol {
+  0%,
+  100% {
+    color: var(--peal);
+  }
+  50% {
+    color: var(--chill-green);
+  }
+}
+
+.btn {
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.Schedule_button {
+  width: 120px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  border-radius: 40px;
+  align-items: center;
+}
+
+.Schedule_button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  height: 37px;
+  border-radius: 40px;
+  white-space: nowrap;
+  background-color: var(--chill-green);
+  transition: all 0.3s ease;
+}
+
+.Schedule_button::after {
+  content: "";
+  display: inline-block;
+  width: 120px;
+  height: 40px;
+  border: 2px solid var(--chill-green);
+  border-radius: 40px;
+  background-color: transparent;
+  color: var(--chill-green);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.Schedule_button p {
+  z-index: 1;
+  color: var(--chill-green);
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.Schedule_button:hover {
+  width: 125px;
+  height: 40px;
+}
+
+.Schedule_button:hover::after {
+  color: var(--midnight);
+  font-weight: 700;
+  width: 125px;
+  height: 39px;
+}
+.Schedule_button:hover p {
+  color: var(--midnight);
+  font-weight: 700;
+}
+
+.Schedule_button:hover::before {
+  width: 100%;
+  height: 39px;
+  transform-origin: left;
+  animation: moveforward 0.3s linear;
+}
+
+@keyframes moveforward {
+  0%,
+  50% {
+    transform: scaleX(0);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+
+/* .btn:hover .Schedule_button::after{
+    transition: all 1s ease;
+    width: 100%;
+} */
+
+.nav_toggler_container {
+  display: none;
+  z-index: 2;
+}
+
+.nav_toggler {
+  height: 40px;
+  width: 45px;
+  bottom: 1px solid var(--bg-black-50);
+  cursor: pointer;
+  border-radius: 5px;
+  background: transparent;
+  align-items: center;
+  justify-content: flex-end;
+  transition: all 0.3s ease;
+  display: flex;
+}
+
+.nav_toggler span {
+  height: 2px;
+  width: 18px;
+  background: var(--tin-white);
+  /* display: inline-block; */
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.nav_toggler.tint span {
+  background: var(--midnight);
+}
+.nav_toggler.tint span::after {
+  background: var(--midnight);
+}
+.nav_toggler.tint span::before {
+  background: var(--midnight);
+}
+.nav_toggler.open span {
+  background-color: transparent;
+  transition: all 0.3s ease;
+}
+
+.nav_toggler span::before {
+  content: "";
+  height: 2px;
+  width: 22px;
+  background: var(--tin-white);
+  position: absolute;
+  top: -6px;
+  left: 0;
+}
+.nav_toggler.open span::before {
+  transition: all 0.3s ease;
+  transform: rotate(45deg);
+  top: 0;
+}
+
+.nav_toggler span::after {
+  content: "";
+  height: 2px;
+  width: 22px;
+  background: var(--tin-white);
+  position: absolute;
+  top: 6px;
+  left: 0;
+}
+.nav_toggler.open span::after {
+  transition: all 0.3s ease;
+  transform: rotate(135deg);
+  top: 0;
+}
+
+.colorRoller {
+  display: none;
+}
+
+.colorsecRoller {
+  display: none;
+}
+
+@media screen and (max-width: 1280px) {
+  .container {
+    max-width: 1280px;
+    width: 100%;
+    padding: 0px 100px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .container {
+    max-width: 1024px;
+    width: 100%;
+    padding: 0px 80px;
+  }
+}
+
+@media screen and (max-width: 860px) {
+  .container {
+    max-width: 860px;
+    width: 100%;
+    padding: 0px 40px;
+  }
+
+  .nav_items {
+    display: block;
+    transition: all 0.3s ease;
+    transform: translateX(100%);
+    position: absolute;
+    /* animation: closemenu 0.3s linear; */
+  }
+
+  .nav_items.open {
+    width: 70vw;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    z-index: 1;
+    transition: all 0.3s ease;
+    transform: translateX(0%);
+    /* animation: openmenu 0.3s linear; */
+  }
+
+  .nav_items.open .menu_background {
+    background: var(--midnight);
+    filter: drop-shadow(2px 4px 6px black) opacity(0.7);
+    right: 0;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    transition: all 0.5s ease;
+    position: absolute;
+  }
+
+  .nav_things {
+    display: none;
+  }
+
+  .nav_items.open .colorRoller {
+    display: block;
+    animation: rotate 2s linear infinite;
+  }
+  .colorRoller img {
+    height: 70px;
+    width: 70px;
+  }
+
+  .nav_items.open .colorsecRoller {
+    display: block;
+    position: absolute;
+    left: -5vw;
+    animation: rotate 2s linear infinite;
+  }
+  .colorsecRoller img {
+    height: 90px;
+    width: 90px;
+  }
+
+  .nav_items.open .nav_things {
+    position: absolute;
+    top: -10%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    opacity: 1;
+  }
+
+  .nav_items.open .nav_items_list_container {
+    /* height: 60%; */
+  }
+
+  .nav_items.open .nav_item_list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 15px 30px;
+    text-align: center;
+  }
+
+  .nav_items.open .nav_item_list a {
+    padding: 20px 0px;
+    font-size: 23px;
+  }
+  /* .nav_items.open .nav_item_list li {
+    padding: 20px 0px;
+    font-size: 23px;
+  } */
+
+  .nav_toggler_container {
+    display: block;
+    transition: all 0.3s ease;
+  }
+
+  .btn {
+    transition: all 0.3s ease;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .container {
+    max-width: 576px;
+    width: 100%;
+    padding: 0px 20px;
+  }
+
+  .nav_items.open {
+    width: 80vw;
+  }
+  .nav_items.open .nav_items_list_container {
+    /* height: 100%; */
+  }
+
+  .nav_items.open .colorsecRoller {
+    left: -7vw;
+  }
+
+  .nav_items.open .nav_item_list li.active {
+    border-bottom: 2px solid var(--tin-white);
+    padding-bottom: 1px;
+  }
+
+  .colorsecRoller img {
+    height: 60px;
+    width: 60px;
+  }
+
+  /* .nav_items {
+    display: none;
+  } */
+
+  /* .nav_toggler_container {
+    display: block;
+  } */
+}
