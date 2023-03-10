@@ -85,12 +85,16 @@ const NavBar = ({
               </ul>
             </div>
             <div className="btn">
+            <NavLink to={'login'} onClick={()=>setMobileNavOpen(false)}>
               <div className="Schedule_button">
                 <p>Login</p>
               </div>
+            </NavLink>
+            <NavLink to={'register'} onClick={()=>setMobileNavOpen(false)}>
               <div className="Schedule_button">
                 <p>Register</p>
               </div>
+            </NavLink>
             </div>
           </div>
           </div>

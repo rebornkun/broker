@@ -7,6 +7,8 @@ import appContext from '../context/AppContext';
 import Splash from '../Pages/Splash/Splash';
 import About from '../Pages/About/About';
 import Faq from '../Pages/Faq/Faq';
+import Login from '../Pages/Login/Login';
+import Register from '../Pages/Register/Register';
 
 
 function App() {
@@ -42,21 +44,29 @@ function App() {
   return (
     <appContext.Provider value={{ appScrollBody, splashdisplay, setSplashDisplay }}>
       <div ref={appScrollBody} className="App">
-        <header className="App-header">
-          <Navbar
-            mobileNavopen={mobileNavopen}
-            setMobileNavOpen={setMobileNavOpen}
-          />
-        </header>
-        <section>
-          <Routes>
-            <Route path="/*" element={<Navigate to="/home" replace={true} />} />
-            <Route path="/home" element={<Home revealAnimation={revealAnimation} />} />
-            <Route path="/about" element={<About revealAnimation={revealAnimation} />} />
-            <Route path="/faq" element={<Faq revealAnimation={revealAnimation}/>} />
-            <Route path="*" element={<Navigate to="home" replace={true} />} />
-          </Routes>
-        </section>
+        <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/*" element={
+              <>
+                <header className="App-header">
+                  <Navbar
+                    mobileNavopen={mobileNavopen}
+                    setMobileNavOpen={setMobileNavOpen}
+                  />
+                </header>
+                <section>
+                  <Routes>
+                    <Route path="/" element={<Navigate to="/home" replace={true} />} />
+                    <Route path="/home" element={<Home revealAnimation={revealAnimation} />} />
+                    <Route path="/about" element={<About revealAnimation={revealAnimation} />} />
+                    <Route path="/faq" element={<Faq revealAnimation={revealAnimation}/>} />
+                    <Route path="*" element={<Navigate to="home" replace={true} />} />
+                  </Routes>
+                </section>
+              </>
+            } />
+        </Routes>
         <Splash />
       </div>
     </appContext.Provider>
