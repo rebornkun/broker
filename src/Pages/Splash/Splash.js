@@ -6,7 +6,7 @@ import './Splash.css'
 const Splash = ({}) => {
 
     const { splashdisplay, setSplashDisplay } = useContext(appContext)
-    console.log(splashdisplay)
+    // console.log(splashdisplay)
     return(
             <div className={`splash_background ${splashdisplay}`}>
                 <div className='splash_container'>

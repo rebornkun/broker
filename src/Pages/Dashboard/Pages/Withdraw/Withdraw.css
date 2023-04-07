@@ -1,0 +1,187 @@
+.dashboard .withdraw section {
+    width: 100%;
+    flex: 1 0;
+    padding-top: 20px;
+}
+
+.box_div.nav svg path{
+    fill: var(--tin-white);
+}
+
+.box_div .fdrow.not{
+    flex-direction: row;
+}
+.not{
+    justify-content: center;
+}
+
+.mini_nav.active h4{
+    color: var(--peal);
+}
+.mini_nav.active svg path{
+    fill: var(--peal);
+}
+
+.make_deposit.box_div{
+    flex-direction: column;
+    /* height: 500px; */
+    min-height: 500px;
+    margin-bottom: 2rem;
+}
+.underline{
+    width: 100%;
+    height: 1px;
+    background-color: grey;
+}
+.paywithcrypto{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+.amount_section{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+}
+.amount_section .back{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.amount_section .back svg{
+    width: 40px;
+    height: 40px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.amount_section .back svg:hover{
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+}
+.amount_section .back svg path{
+    fill: var(--tin-white);
+}
+.paywithcrypto h4{
+    color: var(--tin-white);
+    font-size: 1.6rem;
+    font-weight: 700;
+    font-family: 'Poppins';
+}
+.paywithcrypto .subtitle{
+    color: var(--grey);
+    font-size: 1rem;
+    font-weight: 400;
+    font-family: 'Poppins';
+    margin-top: -1rem;
+    width: 60%;
+    text-align: center;
+}
+.paywithcrypto .inputBox{
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    position: relative;
+    width: 40%;
+}
+.paywithcrypto input{
+    outline: none;
+    padding: 0.6rem 0.8rem;
+    border: none;
+    border-radius: 10px;
+    width: 100%;
+    font-family: 'Manrope';
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+.paywithcrypto label{
+    width: 100%;
+    font-family: 'Manrope';
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: var(--tin-white);
+    letter-spacing: 1px;
+}
+.paywithcrypto button{
+    --webkit-appearance: none;
+    border: none;
+    background: none;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    font-family: 'Manrope';
+}
+.paywithcrypto img{
+    height: 200px;
+    width: 200px;
+}
+
+input:disabled {
+    cursor: default;
+    background-color: var(--grey);
+    color: var(--black);
+    border-color: rgba(118, 118, 118, 0.3);
+}
+.copy{
+    position: absolute;
+    top: 2rem;
+    right: 0.5rem;
+    cursor: pointer;
+    background-color: var(--peal);
+    z-index: 2;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: fit-content;
+}
+.unav{
+    height: 400px;
+    width: 100%;
+    position: relative;
+}
+.unav div{
+    color: red;
+    font-weight: 700;
+    font-size: 1.5rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+@media screen and (max-width: 576px){
+    .make_deposit.box_div .fdrow {
+        flex-direction: row;
+    }
+    .paywithcrypto .inputBox{
+        width: 100%;
+    }
+    .paywithcrypto button{
+        width: 100%;
+    }
+    .paywithcrypto .subtitle{
+        width: 100%;
+    }
+    .paywithcrypto h4{
+        text-align: center;
+    }
+
+}

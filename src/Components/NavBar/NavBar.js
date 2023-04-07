@@ -34,7 +34,7 @@ const NavBar = ({
       <div className="container">
         <NavLink to={'home'}>
             <div className="navloading">
-              <h1>Xtb Trade.</h1>
+              <h1>Xtb Market.</h1>
             </div>
         </NavLink>
         <div className="nav_toggler_container">
@@ -72,11 +72,11 @@ const NavBar = ({
                     About us
                   </li>
                 </NavLink>
-                <NavLink to={'contact'} onClick={()=>setMobileNavOpen(false)}>
+                {/* <NavLink to={'contact'} onClick={()=>setMobileNavOpen(false)}>
                   <li>
                     Contact us
                   </li>
-                </NavLink>
+                </NavLink> */}
                 <NavLink to={'faq'} onClick={()=>setMobileNavOpen(false)}>
                   <li>
                     FAQ

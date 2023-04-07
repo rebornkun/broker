@@ -39,11 +39,11 @@ const CryptoStrip = () => {
         .then((res) => {
             let arr = res.slice(0,7)
             setCryptoData(arr)
-            console.log(arr)
+            // console.log(arr)
         })
     },[])
 
-    const { appScrollBody } = useContext(appContext)
+  const { appScrollBody, btcPrice, setBtcPrice } = useContext(appContext)
   const scroll = () => {
     let elementTop = appScrollBody.current.scrollTop
     let elementheight = appScrollBody.current.scrollHeight
@@ -61,12 +61,17 @@ const CryptoStrip = () => {
   }
 
   useEffect(()=>{
+    setBtcPrice(cryptoData[0])
+  },[])
+  
+  useEffect(()=>{
     appScrollBody.current.addEventListener("scroll", scroll);
-
+    
     return () => {
       appScrollBody.current.removeEventListener("scroll", scroll)
     }
   },[])
+
 
     return (
         <div className={`crypto_strip_container ${!show ? 'show' : ''} fdrow`}>

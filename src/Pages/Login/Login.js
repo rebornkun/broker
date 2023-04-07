@@ -1,11 +1,37 @@
-import { useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import './Login.css'
+import { auth, db, googleProvider } from '../../config/firebase'
+import { createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth'
+import { Link, useNavigate } from 'react-router-dom'
+import { addDoc, collection, getDocs, query, where } from 'firebase/firestore'
+import appContext from '../../context/AppContext'
 
 const Login = () => {
 
     const [show, setShow] = useState(false)
+    const navigate = useNavigate()
+    const userCollectionRef = collection(db, "User") 
+    const { userData, setUserData } = useContext(appContext)
+    
+    useEffect(()=>{
+        let user = localStorage.getItem('user');
+        if(user){
+          navigate("/dashboard")
+        }else{
+        //   navigate("/")
+        }
+    },[])
+
+    const initialValues = {
+        email: '',
+        password: '',
+    }
+    const [values, setValues] = useState(initialValues) 
+    const [isSubmit, setIsSubmit] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
+    const [isSignInWithGoogleLoading, setIsSignInWithGoogleLoading] = useState(false)
+    const [isThereSignUpError, setIsThereSignUpError] = useState('')
     const inputRef = useRef() 
-    // console.log(inValue)
 
     const handleView = () => {
         if(inputRef.current.getAttribute('type') === 'password'){
@@ -17,6 +43,114 @@ const Login = () => {
         }
     }
 
+    const signIn = async(e) => {
+        setIsLoading(true)
+        setIsThereSignUpError('')
+        e.preventDefault()
+        try{
+            await signInWithEmailAndPassword(auth, values.email, values.password)
+            const d = await getDocs(query(userCollectionRef, where("email", "==", `${values.email}`))) 
+            let res = []
+            d.forEach(user => {
+                res.push({
+                    id: user.id, 
+                    ...user.data()
+                })
+            })
+            
+            setUserData(res)
+            if (res[0]?.account_type === 'admin'){
+                localStorage.setItem('user', JSON.stringify({email: values.email, isLoggedIn: true, isAdmin: true}));
+            }else{
+                localStorage.setItem('user', JSON.stringify({email: values.email, isLoggedIn: true}));
+            }
+            setIsLoading(false)
+            navigate('/dashboard', {replace: true})
+        }catch(e){
+            setIsThereSignUpError(e.message)
+            // console.log(e.message)
+            setIsLoading(false)
+        }
+    }
+
+    const forgetPassword = async() => {
+
+        try{
+            const foo = await sendPasswordResetEmail(auth, auth?.currentUser?.email || values.email)
+            alert('Reset Link Sent To Email')
+        }catch(e){
+            alert(e.message)
+        }
+    }
+
+    const handleFieldChange = (e) => {
+        const {name, value} = e.target
+        setValues({...values, [name]: value})
+        // setInValue(value)
+    }
+
+    const signInWithGoogle = async() => {
+        setIsSignInWithGoogleLoading(true)
+        try{
+            const auther = await signInWithPopup(auth, googleProvider)
+            
+            const { user } = auther
+            
+            const d = await getDocs(query(userCollectionRef, where("email", "==", `${user.email}`))) 
+            let res = []
+            d.forEach(user => {
+                res.push({
+                    id: user.id, 
+                    ...user.data()
+                })
+            })
+            let length = res.length
+            if (length === 0){//if user doesnt exist in the system add user and login
+                const added = await addDoc(userCollectionRef, {
+                    email: user.email,
+                    password: "signedInWIthGoogle",
+                    full_name: user.displayName,
+                    address: "",
+                    city: "",
+                    country: "",
+                    state: "",
+                    current_plan: "",
+                    USD: 0,
+                    available: 0,
+                    earned: 0,
+                    paid: 0,
+                    wallet_address: ""
+                })
+                // console.log(added)
+                const d = await getDocs(query(userCollectionRef, where("email", "==", `${user.email}`))) 
+                let res = []
+                d.forEach(user => {
+                    res.push({
+                        id: user.id, 
+                        ...user.data()
+                    })
+                })
+
+                setUserData(res)
+                localStorage.setItem('user', JSON.stringify({email: user.email, isLoggedIn: true}));
+                navigate('/dashboard', {replace: true})
+                return
+                // console.log('user does not exists')
+            }else{
+                
+            }
+            setUserData(res)
+            localStorage.setItem('user', JSON.stringify({email: user.email, isLoggedIn: true}));
+            navigate('/dashboard', {replace: true})
+            setIsSignInWithGoogleLoading(false)
+
+        }catch(e){
+            setIsSignInWithGoogleLoading(false)
+            setIsThereSignUpError(e.message)
+        }
+    }
+
+    // console.log(values)
     return (
         <div className="login_container">
             <div className='login_content'>
@@ -24,16 +158,38 @@ const Login = () => {
                 </div>
                 <div className='forms'>
                     <h1>SIGN IN</h1>
-                    <form>
+                    <form className='login' onSubmit={signIn}>
+                        <div className="Schedule_button login" onClick={signInWithGoogle}>
+                                { 
+                                    isSignInWithGoogleLoading ?
+                                    <div className='loader'>
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5.49995 13V14.25C5.49995 14.3881 5.61188 14.5 5.74995 14.5H6.74995C6.88802 14.5 6.99995 14.3881 6.99995 14.25V13H7.49995V14.25C7.49995 14.3881 7.61188 14.5 7.74995 14.5H8.74995C8.88802 14.5 8.99995 14.3881 8.99995 14.25V13H9.08432C11.0762 13 12.5 11.967 12.5 10.1795C12.5 8.67766 11.4932 7.85714 10.314 7.73993V7.65201C11.2847 7.41026 11.9966 6.67766 11.9966 5.46154C11.9966 3.9304 10.8461 3 9.09152 3H8.99995V1.75C8.99995 1.61193 8.88802 1.5 8.74995 1.5H7.74995C7.61188 1.5 7.49995 1.61193 7.49995 1.75V3H6.92709V1.75C6.92709 1.61193 6.81516 1.5 6.67709 1.5H5.74995C5.61188 1.5 5.49995 1.61193 5.49995 1.75V3L3.50159 3.01123C3.36352 3.01123 3.25159 3.12316 3.25159 3.26123V4.25001C3.25159 4.38745 3.36254 4.49912 3.49998 4.5L4.25476 4.49522C4.66709 4.49787 4.99995 4.83287 4.99995 5.24521V10.75C4.99995 11.1642 4.66417 11.5 4.24995 11.5L3.50159 11.5112C3.36352 11.5112 3.25159 11.6232 3.25159 11.7612V12.7612C3.25159 12.8993 3.36352 13.0112 3.50159 13.0112L5.49995 13ZM6.92709 4.48718H8.64569C9.55173 4.48718 10.0838 4.98535 10.0838 5.79853C10.0838 6.67033 9.50858 7.16117 8.20705 7.16117H6.92709V4.48718ZM6.92709 8.53846H8.76793C9.90408 8.53846 10.5225 9.11722 10.5225 10.0623C10.5225 11.0147 9.89688 11.5128 8.36525 11.5128H6.92709V8.53846Z" fill="black"/>
+                                        </svg>
+                                    </div>
+                                    :
+                                    <div className='fdrow aic jcc gap05' style={{zIndex: '1'}}>
+                                        <svg width="20" height="20" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M15.5453 6.55847C15.6394 7.09345 15.6835 7.64019 15.6835 8.18399C15.6835 10.6179 14.8134 12.6755 13.2996 14.0688H13.3025C11.9768 15.2916 10.1573 16 7.99973 16C4.97503 16 2.209 14.2951 0.850974 11.5938C-0.283656 9.33331 -0.283659 6.67017 0.850972 4.40972C2.209 1.70542 4.97503 0.000539093 7.99973 0.000539093C9.98681 -0.0229766 11.9063 0.723645 13.3525 2.08167L11.0685 4.36563C10.2425 3.57786 9.14024 3.1487 7.99973 3.16633C5.91272 3.16633 4.14022 4.57433 3.50824 6.47028C3.17314 7.46382 3.17314 8.53966 3.50824 9.5332H3.51118C4.1461 11.4262 5.91566 12.8342 8.00267 12.8342C9.08145 12.8342 10.0074 12.5579 10.7246 12.0699H10.7217C11.5653 11.5115 12.1414 10.6326 12.3207 9.63902H7.99973V6.55847H15.5453Z" fill="white"/>
+                                        </svg>
+                                        <p>Sign Up With Google</p>
+                                    </div>
+                                }
+                        </div>
+                        <div className='or_box'>
+                                <span></span>
+                                <p>or</p>
+                                <span></span>
+                        </div>
                         <div className='inputBox'>
                             <label htmlFor={'Email'}>Email</label>
                             <input 
                             type={'email'}
                             id={'Email'}
-                            name={'Email'}
+                            name={'email'}
                             placeholder={'abc@gmail.com'}
-                            // value={inValue}
-                            // onChange={handleFieldChange}
+                            value={values.email}
+                            onChange={handleFieldChange}
                             />
                         </div>
 
@@ -43,10 +199,10 @@ const Login = () => {
                             ref={inputRef}
                             type={'password'}
                             id={'Password'}
-                            name={'Password'}
-                            placeholder={'Min of 6 chars'}
-                            // value={inValue}
-                            // onChange={handleFieldChange}
+                            name={'password'}
+                            placeholder={''}
+                            value={values.password}
+                            onChange={handleFieldChange}
                             />
                             {
                                 show ? 
@@ -63,12 +219,25 @@ const Login = () => {
                                     <path d="M8 5.5C6.61929 5.5 5.5 6.61929 5.5 8C5.5 9.38071 6.61929 10.5 8 10.5C9.38071 10.5 10.5 9.38071 10.5 8C10.5 6.61929 9.38071 5.5 8 5.5ZM4.5 8C4.5 6.067 6.067 4.5 8 4.5C9.933 4.5 11.5 6.067 11.5 8C11.5 9.933 9.933 11.5 8 11.5C6.067 11.5 4.5 9.933 4.5 8Z" fill="black"/>
                                 </svg>
                             }
-                            <p className='forget_password'>Forget Password?</p>
+                            <p onClick={forgetPassword} className='forget_password'>Forget Password?</p>
                         </div>
 
-                        <div className="Schedule_button login">
-                            <p>Login</p>
-                        </div>
+                        <button type='submit'>
+                            <div className="Schedule_button login">
+                                { 
+                                    isLoading ?
+                                    <div className='loader'>
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5.49995 13V14.25C5.49995 14.3881 5.61188 14.5 5.74995 14.5H6.74995C6.88802 14.5 6.99995 14.3881 6.99995 14.25V13H7.49995V14.25C7.49995 14.3881 7.61188 14.5 7.74995 14.5H8.74995C8.88802 14.5 8.99995 14.3881 8.99995 14.25V13H9.08432C11.0762 13 12.5 11.967 12.5 10.1795C12.5 8.67766 11.4932 7.85714 10.314 7.73993V7.65201C11.2847 7.41026 11.9966 6.67766 11.9966 5.46154C11.9966 3.9304 10.8461 3 9.09152 3H8.99995V1.75C8.99995 1.61193 8.88802 1.5 8.74995 1.5H7.74995C7.61188 1.5 7.49995 1.61193 7.49995 1.75V3H6.92709V1.75C6.92709 1.61193 6.81516 1.5 6.67709 1.5H5.74995C5.61188 1.5 5.49995 1.61193 5.49995 1.75V3L3.50159 3.01123C3.36352 3.01123 3.25159 3.12316 3.25159 3.26123V4.25001C3.25159 4.38745 3.36254 4.49912 3.49998 4.5L4.25476 4.49522C4.66709 4.49787 4.99995 4.83287 4.99995 5.24521V10.75C4.99995 11.1642 4.66417 11.5 4.24995 11.5L3.50159 11.5112C3.36352 11.5112 3.25159 11.6232 3.25159 11.7612V12.7612C3.25159 12.8993 3.36352 13.0112 3.50159 13.0112L5.49995 13ZM6.92709 4.48718H8.64569C9.55173 4.48718 10.0838 4.98535 10.0838 5.79853C10.0838 6.67033 9.50858 7.16117 8.20705 7.16117H6.92709V4.48718ZM6.92709 8.53846H8.76793C9.90408 8.53846 10.5225 9.11722 10.5225 10.0623C10.5225 11.0147 9.89688 11.5128 8.36525 11.5128H6.92709V8.53846Z" fill="black"/>
+                                        </svg>
+                                    </div>
+                                    :
+                                    <p>Login</p>
+                                }
+                            </div>
+                        </button>
+                        <p className='already'>Dont have an account ? <Link to={'/register'}>Register!</Link></p>
+                        {isThereSignUpError && <p className='error_text'>{isThereSignUpError}</p>}
 
                     </form>
                 </div>

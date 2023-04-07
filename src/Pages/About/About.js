@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import img from "../../Assets/img/1 (1).jpg";
-import img2 from "../../Assets/img/1 (2).jpg";
-import img3 from "../../Assets/img/1 (3).jpg";
-import img4 from "../../Assets/img/2.jpg";
+import img2 from "../../Assets/img/download (1).jpg";
+import img3 from "../../Assets/img/download (2).jpg";
+import img from "../../Assets/img/images (3).jpg";
+import img4 from "../../Assets/img/images (2).jpg";
 // import glow from "../../Assets/glow.svg";
 // import gradient from "../../Assets/Gradients.svg";
 import "./About.css";
@@ -21,7 +21,7 @@ export default function About({ revealAnimation }) {
         <div className="about_section_container h100p fdcolumn">
           <div className="content about_first">
             <h1 className="Title  reveal fade-top">
-              We are<br></br>XTB Trade.{" "}
+              We are<br></br>XTB Market.{" "}
             </h1>
           </div>
         </div>
@@ -120,7 +120,7 @@ export default function About({ revealAnimation }) {
                 Our business was created to meet the need for simple,
                 affordable, fast and secure managed services. <br></br>
                 <br></br>
-                The Investment Company, formally Xtb investments, was launch in 2019
+                The Investment Company, formally Xtb Market, was launch in 2019
                 because our founder was tired of watching
                 companies, Forex brokers and business owners struggle with
                 ineffective and dated Investment methods and solutions, exorbitant prices and
@@ -164,8 +164,8 @@ export default function About({ revealAnimation }) {
             <div className="about_third_p_scroll">
               <p>
                 Our mission is to act as a catalyst for universal adoption and blockchain innovation. We focus only on investing in cryptocurrency . Our team has experience in both traditional financing and emerging mining technology. We invest, among others, in cryptocurrencies such as BTC, XRP, ETC, and ETH. We also give a chance to new, dynamically developing ICO projects that bring huge profits in an amazingly short time.
-                Our team consists only of qualified people connected with the financial industry for years, who are also passionate about the fledgling but very strong cryptocurrency market and mining technology. They constantly monitor the market to provide you - our investors with even greater profits. Having strong relationships with the most promising entrepreneurs and other leading investors in the industry, Xtb trade implements an investment strategy, building a diversified portfolio and adjusting the added value to its portfolio companies.
-                Xtb Trades uses advanced investment techniques, such as financial leverage, guarantees huge profits even at the currently fluctuating rate of cryptocurrencies, forex and stocks. When starting cooperation with us you have a 100% guarantee that you will not lose your funds, but you can only gain.
+                Our team consists only of qualified people connected with the financial industry for years, who are also passionate about the fledgling but very strong cryptocurrency market and mining technology. They constantly monitor the market to provide you - our investors with even greater profits. Having strong relationships with the most promising entrepreneurs and other leading investors in the industry, Xtb Market implements an investment strategy, building a diversified portfolio and adjusting the added value to its portfolio companies.
+                Xtb Market uses advanced investment techniques, such as financial leverage, guarantees huge profits even at the currently fluctuating rate of cryptocurrencies, forex and stocks. When starting cooperation with us you have a 100% guarantee that you will not lose your funds, but you can only gain.
               </p>
             </div>
           </div>

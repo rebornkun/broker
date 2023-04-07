@@ -9,6 +9,7 @@ import Footer from '../../Components/Footer/Footer'
 import SmallCard from './components/SmallCard/SmallCard'
 import bondsImg from '../../Assets/img/bonds.png'
 import commoditiesImg from '../../Assets/img/commodities.png'
+import cert from '../../Assets/img/cert.png'
 import digitalImg from '../../Assets/img/digital_curr.png'
 import forexImg from '../../Assets/img/forexx.png'
 import indicesImg from '../../Assets/img/indices.png'
@@ -17,6 +18,7 @@ import sharesImg from '../../Assets/img/shares.png'
 import CryptoStrip from './components/CryptoStrip/CryptoStrip'
 import PlanCard from './components/PlanCard/PlanCard'
 import SimpleMap from '../../Components/Map'
+import { Link } from 'react-router-dom'
 
 const Home = ({revealAnimation}) =>{
 
@@ -89,10 +91,12 @@ const Home = ({revealAnimation}) =>{
                                 Start trading in minutes!</p>
                             </div>
                             <div className='btn'>
-                                <div className="Start_a_project_btn">
-                                    <p className='btn_text'>Start Trading</p>
-                                    <img src={buttonIcon} alt='button icon'></img>
-                                </div>
+                                <Link to='/login' >
+                                    <div className="Start_a_project_btn">
+                                        <p className='btn_text'>Start Trading</p>
+                                        <img src={buttonIcon} alt='button icon'></img>
+                                    </div>
+                                </Link>
                             </div>
                         </div>
                         <div className='star_container'>
@@ -106,7 +110,7 @@ const Home = ({revealAnimation}) =>{
                 <div className='section second_section'>
                     <div className='section_container'>
                         <div className='contents home_second'>
-                            <h1>What you can <span>Trade With Xtb Trade?</span></h1>
+                            <h1>What you can <span>Trade With Xtb Market?</span></h1>
                             <div className='small_card_container'>
                                 <SmallCard img={forexImg} title='Forex' text='60+ forex currency pairs on MT4'/>
                                 <SmallCard img={sharesImg} title='Shares' text='More than 10,000 stocks on global exchanges'/>
@@ -202,10 +206,10 @@ const Home = ({revealAnimation}) =>{
                             <div className='flex hfc fdcolumn  reveal fade-top'>
                                 <h1>Our Plans</h1>
                                 <div className='fdrow jcsevenly' style={{gap: '2rem', flexWrap: 'wrap'}}>
-                                    <PlanCard color={'#b41414'} title={'Basic'} cost={300} interest={20} min={300} max={499} duration={24} />
-                                    <PlanCard color={'#35b6b8'} title={'Standard'} cost={500} interest={30} min={500} max={999} duration={24} />
-                                    <PlanCard color={'#ba8318'} title={'Gold'} cost={1000} interest={50} min={1000} max={4999} duration={24} />
-                                    <PlanCard color={'#262424'} title={'Platinum'} cost={5000} interest={100} min={5000} max={'Unlimited'} duration={24} />
+                                    <PlanCard color={'#b41414'} title={'Basic'} cost={1000} interest={200} min={300} max={1999} duration={24} />
+                                    <PlanCard color={'#35b6b8'} title={'Standard'} cost={2500} interest={300} min={2500} max={7499} duration={24} />
+                                    <PlanCard color={'#ba8318'} title={'Gold'} cost={5000} interest={400} min={5000} max={19999} duration={24} />
+                                    <PlanCard color={'#262424'} title={'Platinum'} cost={10000} interest={400} min={10000} max={'Unlimited'} duration={24} />
                                 </div>
                             </div>
                         </div>
@@ -215,12 +219,12 @@ const Home = ({revealAnimation}) =>{
                 <div className='section second_section'>
                     <div className='section_container'>
                         <div style={{paddingBottom: '6rem'}} className='contents home_second'>
-                            <h1 style={{marginBottom: '2rem', marginTop: '4rem'}}>Why<span> Xtb Trade?</span></h1>
+                            <h1 style={{marginBottom: '2rem', marginTop: '4rem'}}>Why<span> Xtb Market?</span></h1>
                             <div className='doc'>
                                 <div className='fdrow jcsb gap1 fww' style={{marginBottom: '1rem'}}>
                                     <div className='did'>
                                         <h5 style={{textAlign: 'left'}}>Legal Company</h5>
-                                        <p style={{textAlign: 'left'}} >Xtb trade is an company registered in the United States, providing its investment services to the members all around the world.</p>
+                                        <p style={{textAlign: 'left'}} >Xtb Market is an company registered in the United States, providing its investment services to the members all around the world.</p>
                                     </div>
                                     <div className='did'>
                                         <h5 style={{textAlign: 'right'}}>Customer Support</h5>
@@ -255,7 +259,7 @@ const Home = ({revealAnimation}) =>{
                                 <div className='building'>
                                     <div className='building_text_container'>
                                         <div className='building_text'>
-                                            <p className='reveal fade-bottom'>Xtb trades is a legally operating company. Xtb trade is a leading blockchain investment company.
+                                            <p className='reveal fade-bottom'>Xtb Market is a legally operating company. Xtb Market is a leading blockchain investment company.
                                             Our mission is to act as a catalyst for universal adoption and blockchain innovation.</p>
                                         </div>
                                         <div className='building_btn'>
@@ -275,10 +279,15 @@ const Home = ({revealAnimation}) =>{
                     </div>
                 </div>
 
-                <div className='section pebground' style={{height: '500px'}} >
+                <div className='section pebground' style={{height: 'fit-content'}} >
                     <div className='section_container'>
-                        <div className='contents home_fifth'>
-                            {/* <SimpleMap /> */}
+                        <div className='contents home_fifth coll'>
+                            <div className='collapse'>
+                                <iframe width="100%" height="100%" style={{maxWidth: '100%', border: '10px solid #FFF', borderRadius: '3px'}} src="https://www.youtube.com/embed/GmOzih6I1zs" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            </div>
+                            <div className='collapse'>
+                                <img className='' src={cert} alt='cert'/>
+                            </div>
                         </div>
                     </div>
                 </div>

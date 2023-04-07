@@ -1,0 +1,27 @@
+.dashboard{
+    width: 100%;
+    height: 100%;
+    background-color: var(--black);
+    display: flex;
+    flex-direction: row;
+}
+
+.dashboard section{
+    width: 100%;
+    flex: 1 0;
+    padding-top: 50px;
+}
+
+.dashpage{
+    height: 100%;
+    overflow: overlay;
+    width: 100%;
+    /* padding: 0rem 1rem; */
+    padding: 0rem 1rem 0rem 96px;
+}
+
+@media screen and (max-width: 576px) {
+    .dashpage{
+        padding: 0rem 1rem 0rem 66px;
+    }
+}

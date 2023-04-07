@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+
 *{
   margin: 0;
   padding: 0;
@@ -21,6 +23,9 @@ ul{
   --chill-green: #2bd4a4;
   --yellow: #ffef89;
   --peal: #ffac89;
+  --black: #000000;
+  --pri: #131722;
+  --grey: #a1a0a7;
 }
 
 .App {
@@ -116,6 +121,12 @@ body{
 }
 .gap1{
   gap: 1rem;
+}
+.gap02{
+  gap: 0.2rem;
+}
+.gap05{
+  gap: 0.5rem;
 }
 /* scroll animations */
 
