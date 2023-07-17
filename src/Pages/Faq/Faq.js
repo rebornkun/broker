@@ -127,7 +127,7 @@ export default function Faq({ revealAnimation }) {
               title={"Who may be a client of Xtb Market?"}
               text={
                 <p>
-                  Everyone may be a client of xtbmarket.io, but he\she must be
+                  Everyone may be a client of xtbmarket.co, but he\she must be
                   not less 18 years old.
                 </p>
               }

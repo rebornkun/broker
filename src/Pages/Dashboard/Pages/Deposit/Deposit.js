@@ -28,7 +28,6 @@ import emailjs from "@emailjs/browser";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { v4 } from "uuid";
 
-xtb
 const Box = () => {
   return (
     <div className="box_div nav">
