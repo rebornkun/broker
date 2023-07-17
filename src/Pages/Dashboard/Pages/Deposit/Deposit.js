@@ -154,6 +154,7 @@ const PayWithCrypto = () => {
     usd: "",
     btc: "",
   };
+
   const [error, setError] = useState(initialErrorValues);
   const [pageNo, setPageNo] = useState(1);
   const [cryptoType, setCryptoType] = useState("");
