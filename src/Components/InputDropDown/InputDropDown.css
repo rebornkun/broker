@@ -1,0 +1,88 @@
+.topinput {
+  text-align: end;
+  background: none;
+  outline: none;
+  border: 0.5px solid var(--sec);
+  border-radius: 4px;
+  font-size: 12px;
+  color: var(--black);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 6px 15px;
+  color: var(--black);
+  font-family: "Montserrat", sans-serif;
+  width: 100%;
+}
+.input_with_top_title {
+  min-width: 170px;
+  position: relative;
+}
+.input_with_top_title label {
+  width: 100%;
+  font-family: "Manrope";
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--tin-white);
+  letter-spacing: 1px;
+}
+
+.inputdrop button {
+  background-color: transparent;
+  color: #000;
+  border-color: #000;
+  background-color: white;
+  border-radius: 10px;
+  outline: none;
+  padding: 0.6rem 0.8rem;
+  width: 100%;
+  font-weight: 600;
+  font-size: 0.9rem;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  font-family: "Manrope";
+}
+.inputdrop button:hover {
+  color: #000;
+  background-color: white;
+  border-color: #000;
+}
+
+.inputdrop .btn-check:checked + .btn,
+.inputdrop .btn.active,
+.inputdrop .btn.show,
+.inputdrop .btn:first-child:active,
+.inputdrop :not(.btn-check) + .btn:active {
+  color: #000;
+  background-color: white;
+  border-color: #000;
+}
+
+.inputdrop .dropdown-menu {
+  width: 170px;
+  position: absolute !important;
+  inset: unset !important;
+  transform: translate(0px, 0px) !important;
+}
+
+.inputdrop .dropdown-item {
+  font-weight: 400;
+  font-size: 0.8rem;
+}
+
+/* for really big screens  */
+@media screen and (min-width: 1440px) {
+  .inputdrop button {
+    font-size: 0.9rem;
+    height: 38px;
+  }
+
+  .inputdrop .dropdown-menu {
+    width: 200px;
+  }
+
+  .inputdrop .dropdown-item {
+    font-size: 1rem;
+  }
+}

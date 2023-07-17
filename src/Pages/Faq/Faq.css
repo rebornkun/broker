@@ -20,7 +20,6 @@
   align-items: center;
 }
 
-
 .about_section {
   height: fit-content;
   width: 100%;
@@ -51,12 +50,12 @@
   margin-top: 160px;
   /* Headings/H1 */
   font-style: normal;
-  font-weight: 700;
-  font-size: 88px;
-  line-height: 120px;
+  font-weight: 700 !important;
+  font-size: 88px !important;
+  line-height: 120px !important;
   /* or 125% */
 
-  letter-spacing: -0.01em;
+  letter-spacing: -0.01em !important;
 
   /* Primary/Tin white */
 
@@ -92,26 +91,26 @@
   margin-top: 4rem;
 }
 .about_second h1 {
-  margin: 20px 0px;
+  margin: 20px 0px !important;
   font-style: normal;
-  font-weight: 700;
-  font-size: 88px;
-  line-height: 120px;
-  letter-spacing: -0.01em;
+  font-weight: 700 !important;
+  font-size: 88px !important;
+  line-height: 120px !important;
+  letter-spacing: -0.01em !important;
 }
 
-.faqbox{
+.faqbox {
   width: 100%;
   height: 50px;
   border: 1px solid black;
   transition: all 0.4s ease;
   overflow: hidden;
 }
-.faqbox.open{
+.faqbox.open {
   height: fit-content;
   transition: all 0.4s ease;
 }
-.faqbox_header{
+.faqbox_header {
   width: 100%;
   height: 50px;
   background-color: var(--chill-green);
@@ -121,12 +120,12 @@
   padding: 1rem;
   align-items: center;
 }
-.faqbox_header h5{
+.faqbox_header h5 {
   font-weight: 600;
-  font-size: 1.2rem;
+  font-size: 1.2rem !important;
   width: 90%;
 }
-.plus{
+.plus {
   width: 100%;
   height: 30%;
   background-color: var(--midnight);
@@ -139,14 +138,13 @@
   transform: rotate(0deg);
   transition: all 0.4s ease;
 }
-.plus.close{
+.plus.close {
   transform: rotate(90deg);
   transition: all 0.4s ease;
 }
-.faqbox_body{
+.faqbox_body {
   padding: 1rem 1rem;
 }
-
 
 /* small laptops */
 /* small laptops */
@@ -191,8 +189,8 @@
 
   .Title {
     margin-top: 220px;
-    font-size: 78px;
-    line-height: 100px;
+    font-size: 78px !important;
+    line-height: 100px !important;
   }
 
   .glow svg {
@@ -204,9 +202,9 @@
   }
 
   .about_second h1 {
-    font-size: 78px;
+    font-size: 78px !important;
     width: 70%;
-    line-height: 90px;
+    line-height: 90px !important;
   }
 
   .origin_p_scroll {
@@ -214,9 +212,9 @@
   }
 
   .about_second p {
-    margin-left: 12%;
+    margin-left: 12% !important;
     gap: 0px;
-    font-size: 23px;
+    font-size: 23px !important;
   }
 
   .drive-us-container {
@@ -224,8 +222,8 @@
   }
 
   .about_third h1 {
-    font-size: 78px;
-    line-height: 90px;
+    font-size: 78px !important;
+    line-height: 90px !important;
     width: 55%;
   }
 
@@ -234,10 +232,10 @@
   }
 
   .about_third p {
-    padding-bottom: 0px;
+    padding-bottom: 0px !important;
     margin-left: 12%;
     gap: 0px;
-    font-size: 23px;
+    font-size: 23px !important;
   }
 
   .team {
@@ -267,9 +265,9 @@
   }
 
   .Title {
-    margin-top: 40vh;
-    font-size: 48px;
-    line-height: 60px;
+    margin-top: 40vh !important;
+    font-size: 60px !important;
+    line-height: 60px !important;
   }
 
   .glow svg {
@@ -281,8 +279,8 @@
     /* height: 830px; */
   }
   .about_second h1 {
-    font-size: 48px;
-    line-height: 60px;
+    font-size: 48px !important;
+    line-height: 60px !important;
     margin: 60px 0px 20px;
     width: 100%;
   }
@@ -296,15 +294,15 @@
   }
 
   .about_third h1 {
-    font-size: 48px;
-    line-height: 60px;
+    font-size: 48px !important;
+    line-height: 60px !important;
     margin: 60px 0px 20px;
     width: 100%;
   }
 
   .align h1 {
-    font-size: 50px;
-    line-height: 60px;
+    font-size: 50px !important;
+    line-height: 60px !important;
     margin: 40px 0px 20px;
   }
 
@@ -330,28 +328,28 @@
   }
 
   .info h4 {
-    font-size: 23px;
-    padding: 2px 0px;
+    font-size: 23px !important;
+    padding: 2px 0px !important;
   }
 
   .info p {
-    font-size: 13px;
-    padding: 2px 0px;
+    font-size: 13px !important;
+    padding: 2px 0px !important;
   }
 
   .about_fifth {
-    line-height: 30px;
-    font-size: 20px;
-    margin: 10px 0px;
+    line-height: 30px !important;
+    font-size: 20px !important;
+    margin: 10px 0px !important;
   }
 
   .other-container {
     height: 50vh;
   }
 
-  .faqbox_header h5{
-    font-weight: 600;
-    font-size: 0.8rem;
+  .faqbox_header h5 {
+    font-weight: 600 !important;
+    font-size: 0.8rem !important;
     width: 90%;
   }
 }

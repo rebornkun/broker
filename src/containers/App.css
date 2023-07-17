@@ -1,18 +1,72 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap");
 
-*{
+* {
   margin: 0;
   padding: 0;
   text-decoration: none;
   outline: none;
   box-sizing: border-box;
 }
-::before,::after{
+::before,
+::after {
   box-sizing: border-box;
 }
-
-ul{
+body {
+  line-height: initial !important;
+  color: initial !important;
+  text-align: initial !important;
+}
+.btn {
+  border: initial !important;
+  --bs-btn-line-height: initial !important;
+}
+.h5,
+h5 {
+  font-size: initial !important;
+}
+.h4,
+h4 {
+  font-size: initial !important;
+}
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: initial !important;
+  margin-bottom: initial !important;
+  font-weight: 500 !important;
+  line-height: initial !important;
+  /* font-size: initial !important; */
+}
+a:-webkit-any-link {
+  color: -webkit-link !important;
+}
+ul {
   list-style: none;
+}
+dl,
+ol,
+ul {
+  margin-top: initial !important;
+  margin-bottom: initial !important;
+}
+
+a {
+  color: initial !important;
+  text-decoration: none !important;
+}
+
+p {
+  margin-top: initial !important;
+  margin-bottom: initial !important;
 }
 
 :root {
@@ -45,18 +99,18 @@ ul{
   height: 4px;
 }
 .App::-webkit-scrollbar-track {
-border-radius: 10px;
-/* background-color: transparent;
+  border-radius: 10px;
+  /* background-color: transparent;
 scrollbar-color: transparent; */
 }
 .App::-webkit-scrollbar-thumb {
-border-radius: 7px;
-background: var(--rebbon-blue);
+  border-radius: 7px;
+  background: var(--rebbon-blue);
 }
 
-body{
+body {
   font-size: 16px;
-  font-family: 'Manrope', sans-serif;
+  font-family: "Manrope", sans-serif;
 }
 /* body {
     overflow: hidden;
@@ -64,68 +118,68 @@ body{
     overflow-x: hidden;
 } */
 
-.noscroll{
+.noscroll {
   overflow: hidden;
 }
 
 /* //general */
-.flex{
+.flex {
   display: flex;
 }
-.h100p{
+.h100p {
   height: 100%;
 }
-.h200{
+.h200 {
   height: 200px;
 }
-.h300{
+.h300 {
   height: 300px;
 }
-.h400{
+.h400 {
   height: 400px;
 }
-.h500{
+.h500 {
   height: 500px;
 }
-.h600{
+.h600 {
   height: 600px;
 }
-.w100p{
+.w100p {
   width: 100%;
 }
-.fdcolumn{
+.fdcolumn {
   display: flex;
   flex-direction: column;
 }
-.fdrow{
+.fdrow {
   display: flex;
   flex-direction: row;
 }
-.hfc{
+.hfc {
   height: fit-content;
 }
-.jcsevenly{
+.jcsevenly {
   justify-content: space-evenly;
 }
-.jcsb{
+.jcsb {
   justify-content: space-between;
 }
-.jcc{
+.jcc {
   justify-content: center;
 }
-.aic{
+.aic {
   align-items: center;
 }
-.fww{
+.fww {
   flex-wrap: wrap;
 }
-.gap1{
+.gap1 {
   gap: 1rem;
 }
-.gap02{
+.gap02 {
   gap: 0.2rem;
 }
-.gap05{
+.gap05 {
   gap: 0.5rem;
 }
 /* scroll animations */
@@ -159,7 +213,6 @@ body{
 .active.rotate-left-small {
   animation: rotate-left-small 0.4s ease-in;
 }
-
 
 /* keyframe */
 

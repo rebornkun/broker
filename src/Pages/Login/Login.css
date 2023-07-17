@@ -1,177 +1,190 @@
-.login_container{
-    width: 100%;
-    height: 100%;
-    background-image: url('../../Assets/img/wance.jpg');
-        background-repeat: no-repeat;
-    background-size: cover;
+.login_container {
+  width: 100%;
+  height: 100%;
+  background-image: url("../../Assets/img/wance.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-.login_content{
-    height: 450px;
-    width: 400px;
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    margin: auto;
-    z-index: 1;
+.login_content {
+  height: 450px;
+  width: 400px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 1;
 }
-.login_content.reg{
-    height: 580px;
-    width: 460px;
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    margin: auto;
-    z-index: 1;
+.login_content.reg {
+  height: 580px;
+  width: 500px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 1;
 }
-.form_container{
-    height: 100%;
-    width: 100%;
-    border-radius: 20px;
-    background: var(--midnight);
-    filter: drop-shadow(1px 1px 4px black) opacity(0.7);
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    margin: auto;
-    z-index: -1;
+.form_container {
+  height: 100%;
+  width: 100%;
+  border-radius: 20px;
+  background: var(--midnight);
+  filter: drop-shadow(1px 1px 4px black) opacity(0.7);
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: -1;
 }
-.forms{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    height: 100%;
-    width: 100%;
-    z-index: 2;
-    gap: 0.5rem;
+.forms {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+  gap: 0.5rem;
 }
-.forms.reg{
-    gap: 0rem;
+.forms.reg {
+  gap: 0rem;
 }
 .forms.reg form {
-    gap: 0.5rem;
+  gap: 0.5rem;
 }
 form.login,
-form.register{
-    width: 100%;
-    display: flex;
-    gap: 1rem;
-    display: flex;
-    flex-direction: column;
+form.register {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
 }
-form .inputBox{
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-    position: relative;
+form .inputBox {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  position: relative;
 }
-form .inputBox svg{
-    cursor: pointer;
-    height: 20px;
-    width: 20px;
-    position: absolute;
-    right: 0.5rem;
-    bottom: 0;
-    top: 0.1rem;
-    margin: auto;
+form .inputBox svg {
+  cursor: pointer;
+  height: 20px;
+  width: 20px;
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0;
+  top: 0.1rem;
+  margin: auto;
 }
-.forms.reg .inputBox svg{
-    top: 1.3rem;
+.forms.reg .inputBox svg {
+  top: 1.3rem;
 }
-
-form label{
-    width: 100%;
-    font-family: 'Manrope';
-    font-weight: 600;
-    font-size: 0.8rem;
-    color: var(--tin-white);
-    letter-spacing: 1px;
+.paywithcrypto .inputBox svg {
+  cursor: pointer;
+  height: 20px;
+  width: 20px;
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0;
+  top: 0.1rem;
+  margin: auto;
 }
-form input{
-    outline: none;
-    padding: 0.6rem 0.8rem;
-    border: none;
-    border-radius: 10px;
-    width: 100%;
-    font-family: 'Manrope';
-    font-weight: 600;
-    font-size: 0.9rem;
-}
-.login_content .forms h1{
-    animation: changeCol 1.5s linear infinite;
-    z-index: 2;
-    letter-spacing: 3px;
-    font-family: 'Poppins';
-    font-weight: 900;
+.paywithcrypto .inputBox svg {
+  top: 1.3rem;
 }
 
-form button{
-    --webkit-appearance: none;
-    border: none;
-    background: none;
-    height: fit-content;
-    width: 100%;
-    font-family: 'Manrope';
+form label {
+  width: 100%;
+  font-family: "Manrope";
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--tin-white);
+  letter-spacing: 1px;
+}
+form input {
+  outline: none;
+  padding: 0.6rem 0.8rem;
+  border: none;
+  border-radius: 10px;
+  width: 100%;
+  font-family: "Manrope";
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.login_content .forms h1 {
+  animation: changeCol 1.5s linear infinite;
+  z-index: 2;
+  letter-spacing: 3px;
+  font-family: "Poppins";
+  font-weight: 900;
 }
 
-.Schedule_button.login{
-    width: 100%;
-    border-radius: 10px;
-    margin-top: 0.5rem;
+form button {
+  --webkit-appearance: none;
+  border: none;
+  background: none;
+  height: fit-content;
+  width: 100%;
+  font-family: "Manrope";
 }
-.Schedule_button.login::before{
-    border-radius: 10px;
+
+.Schedule_button.login {
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 0.5rem;
 }
-.Schedule_button.login::after{
-    width: 100%;
-    border-radius: 10px;
+.Schedule_button.login::before {
+  border-radius: 10px;
 }
-.forget_password{
-    text-align: end;
-    font-weight: 500;
-    font-size: 0.8rem;
-    color: var(--tin-white);
-    cursor: pointer;
+.Schedule_button.login::after {
+  width: 100%;
+  border-radius: 10px;
 }
-.already{
-    position: absolute;
-    bottom: -2rem;
-    font-size: 0.9rem;
-    right: 0rem;
-    color: var(--tin-white);
-    font-weight: 500;
+.forget_password {
+  text-align: end;
+  font-weight: 500;
+  font-size: 0.8rem;
+  color: var(--tin-white);
+  cursor: pointer;
 }
-.already a{
-    color: var(--chill-green);
-    font-weight: 700;
+.already {
+  position: absolute;
+  bottom: -2rem;
+  font-size: 0.9rem;
+  right: 0rem;
+  color: var(--tin-white);
+  font-weight: 500;
+}
+.already a {
+  color: var(--chill-green);
+  font-weight: 700;
 }
 
 @media screen and (max-width: 576px) {
-    .login_container{
-        padding: 1rem;
-    }
-    .login_content{
-        height: 450px;
-        width: 90%;
-        /* margin: 0rem 1rem; */
-    }
-    .login_content.reg{
-        height: 600px;
-        width: 90%;
-        /* margin: 0rem 1rem; */
-    }
+  .login_container {
+    padding: 1rem;
+  }
+  .login_content {
+    height: 450px;
+    width: 90%;
+    /* margin: 0rem 1rem; */
+  }
+  .login_content.reg {
+    height: 600px;
+    width: 90%;
+    /* margin: 0rem 1rem; */
+  }
 
-    .Schedule_button.login{
-        width: 100%;
-        border-radius: 10px;
-        margin-top: 1rem;
-    }
+  .Schedule_button.login {
+    width: 100%;
+    border-radius: 10px;
+    margin-top: 1rem;
+  }
 }

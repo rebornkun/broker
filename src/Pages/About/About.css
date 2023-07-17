@@ -20,7 +20,6 @@
   align-items: center;
 }
 
-
 .about_section {
   height: fit-content;
   width: 100%;
@@ -48,15 +47,15 @@
 }
 
 .Title {
-  margin-top: 160px;
+  margin-top: 160px !important;
   /* Headings/H1 */
   font-style: normal;
-  font-weight: 700;
-  font-size: 88px;
-  line-height: 120px;
+  font-weight: 700 !important;
+  font-size: 88px !important;
+  line-height: 120px !important;
   /* or 125% */
 
-  letter-spacing: -0.01em;
+  letter-spacing: -0.01em !important;
 
   /* Primary/Tin white */
 
@@ -91,12 +90,12 @@
   overflow: hidden;
 }
 .about_second h1 {
-  margin: 20px 0px;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 88px;
-  line-height: 120px;
-  letter-spacing: -0.01em;
+  margin: 20px 0px !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  font-size: 88px !important;
+  line-height: 120px !important;
+  letter-spacing: -0.01em !important;
 }
 
 .origin_p_scroll {
@@ -133,12 +132,12 @@
   overflow: hidden;
 }
 .about_third h1 {
-  margin: 20px 0px;
+  margin: 20px 0px !important;
   font-style: normal;
-  font-weight: 700;
-  font-size: 88px;
-  line-height: 120px;
-  letter-spacing: -0.01em;
+  font-weight: 700 !important;
+  font-size: 88px !important;
+  line-height: 120px !important;
+  letter-spacing: -0.01em !important;
 }
 
 .about_third_p_scroll {
@@ -202,13 +201,13 @@
 
   font-family: "Manrope";
   font-style: normal;
-  font-weight: 700;
-  font-size: 66px;
-  line-height: 100px;
-  margin: 20px 0px;
+  font-weight: 700 !important;
+  font-size: 66px !important;
+  line-height: 100px !important;
+  margin: 20px 0px !important;
   /* identical to box height, or 125% */
 
-  letter-spacing: -0.02em;
+  letter-spacing: -0.02em !important;
 
   /* Primary/Tin white */
 
@@ -238,10 +237,10 @@
   margin-left: 20px;
 }
 .info h4 {
-  font-size: 26px;
+  font-size: 26px !important;
 }
 .info p {
-  font-size: 16px;
+  font-size: 16px !important;
 }
 
 .person img {
@@ -250,11 +249,11 @@
 }
 
 .about_fifth {
-  text-align: center;
-  font-size: 40px;
+  text-align: center !important;
+  font-size: 40px !important;
   width: 100%;
-  line-height: 65px;
-  margin: 50px 0px;
+  line-height: 65px !important;
+  margin: 50px 0px !important;
   display: flex;
   height: 100%;
   align-items: center;

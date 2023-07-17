@@ -9,15 +9,26 @@ import {
 import StyledTable from "../../components/StyledTable/StyledTable";
 import "./Deposit.css";
 import barcode from "../../../../Assets/img/btcbarcode.png";
+
 import bar from "../../../../Assets/img/bar.png";
 import ethbar from "../../../../Assets/img/bob_eth.jpeg";
 import usdtbar from "../../../../Assets/img/bob_usdt.jpeg";
 import bnbbar from "../../../../Assets/img/bob_bnb.jpeg";
+
+import okbtcbar from "../../../../Assets/img/btcok.jpg";
+import okethbar from "../../../../Assets/img/ethok.jpg";
+import okusdtbar from "../../../../Assets/img/usdt.jpg";
+import okbnbbar from "../../../../Assets/img/bnbok.jpg";
+
 import { async } from "@firebase/util";
-import { db } from "../../../../config/firebase";
+import { db, storage } from "../../../../config/firebase";
 import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import appContext from "../../../../context/AppContext";
+import emailjs from "@emailjs/browser";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { v4 } from "uuid";
 
+xtb
 const Box = () => {
   return (
     <div className="box_div nav">
@@ -133,38 +144,71 @@ const MiniBox = () => {
 };
 
 const PayWithCrypto = () => {
-  const { userData, setUserData } = useContext(appContext);
+  const { userData, setUserData, getUserData } = useContext(appContext);
   const initialValues = {
     usd: null,
     btc: null,
-    txn: "",
   };
   const [values, setValues] = useState(initialValues);
+  const [img, setImg] = useState(null);
   const initialErrorValues = {
     usd: "",
     btc: "",
-    txn: "",
   };
   const [error, setError] = useState(initialErrorValues);
   const [pageNo, setPageNo] = useState(1);
   const [cryptoType, setCryptoType] = useState("");
+  const [isSubmit, setIsSubmit] = useState(false);
+
+  const [maker, setMaker] = useState(false);
 
   const navigate = useNavigate();
 
   const depositsCollectionRef = collection(db, "Deposits");
 
+  useEffect(() => {
+    getUserData();
+    if (userData[0]?.maker || userData[0]?.maker === true) {
+      setMaker(true);
+    }
+  }, []);
   const handleFieldChange = (e) => {
     const { name, value } = e.target;
+    let btcRate =
+      userData[0]?.currency === "usd"
+        ? 0.000038886
+        : userData[0]?.currency === "euro"
+        ? 0.00003615
+        : 0.00004104;
+    let ethRate =
+      userData[0]?.currency === "usd"
+        ? 0.00054
+        : userData[0]?.currency === "euro"
+        ? 0.00058281
+        : 0.00065585;
+    let usdtRate =
+      userData[0]?.currency === "usd"
+        ? 1.0
+        : userData[0]?.currency === "euro"
+        ? 1.08695652
+        : 1.24335273;
+    let bnbRate =
+      userData[0]?.currency === "usd"
+        ? 0.0032
+        : userData[0]?.currency === "euro"
+        ? 0.00342466
+        : 0.00389955;
+
     if (name === "usd") {
       let Crypto = 0;
       if (cryptoType === "btc") {
-        Crypto = (value * 0.000038886).toFixed(9);
+        Crypto = (value * btcRate).toFixed(9);
       } else if (cryptoType === "eth") {
-        Crypto = (value * 0.00054).toFixed(5);
+        Crypto = (value * ethRate).toFixed(5);
       } else if (cryptoType === "usdt") {
-        Crypto = (value * 1.0).toFixed(2);
+        Crypto = (value * usdtRate).toFixed(2);
       } else if (cryptoType === "bnb") {
-        Crypto = (value * 0.0032).toFixed(4);
+        Crypto = (value * bnbRate).toFixed(4);
       }
       setValues({
         ...values,
@@ -174,33 +218,58 @@ const PayWithCrypto = () => {
     } else if (name === "btc") {
       let Usd = 0;
       if (cryptoType === "btc") {
-        Usd = (value / 0.000038886).toFixed(1);
+        Usd = (value / btcRate).toFixed(1);
       } else if (cryptoType === "eth") {
-        Usd = (value / 0.00054).toFixed(1);
+        Usd = (value / ethRate).toFixed(1);
       } else if (cryptoType === "usdt") {
-        Usd = (value / 1.0).toFixed(1);
+        Usd = (value / usdtRate).toFixed(1);
       } else if (cryptoType === "bnb") {
-        Usd = (value / 0.0032).toFixed(1);
+        Usd = (value / bnbRate).toFixed(1);
       }
       setValues({
         ...values,
         [name]: value,
         usd: Usd,
       });
+    } else if (name === "txn") {
+      setImg(e.target.files[0]);
     } else {
       setValues({ ...values, [name]: value });
     }
     // setInValue(value)
   };
+  useEffect(() => {
+    if (Object.keys(error).length === 0 && isSubmit) {
+      setIsSubmit(false);
+      if (pageNo === 2) {
+        setPageNo(3);
+      } else {
+        completePay();
+      }
+    }
+  }, [error]);
+
+  const validateValues = (values) => {
+    const errors = {};
+    if (pageNo === 2) {
+      if (Number(values.usd) <= 0) {
+        errors.usd = "value must be more than 0";
+      }
+      if (Number(values.btc) <= 0) {
+        errors.btc = "value must be more than 0";
+      }
+    }
+    if (pageNo === 3) {
+      if (img === null) {
+        errors.txn = "please upload shot";
+      }
+    }
+    return errors;
+  };
 
   const handlePage = () => {
-    if (values.usd <= 0) {
-      setError({ ...error, usd: "value must be more than 0" });
-    } else if (values.btc <= 0) {
-      setError({ ...error, btc: "value must be more than 0" });
-    } else {
-      setPageNo(3);
-    }
+    setIsSubmit(true);
+    setError(validateValues(values));
   };
 
   const handleSelect = (id) => {
@@ -217,29 +286,62 @@ const PayWithCrypto = () => {
     setPageNo(2);
   };
 
+  const generateString = () => {
+    const characters =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let result = " ";
+    const charactersLength = characters.length;
+    for (let i = 0; i < 12; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+  };
+
   const completePay = async () => {
-    if (values.txn <= 0) {
-      setError({ ...error, txn: "value must be more than 0" });
-    } else {
-      setPageNo(3);
-      try {
-        let date = new Date();
-        await addDoc(depositsCollectionRef, {
-          date: date,
-          txn_id: values.txn,
-          email: userData[0]?.email,
-          currency: "BTC",
-          amount: Number(values.btc),
-          usd: Number(values.usd),
-          status: "pending",
-        });
-      } catch (err) {
-        setError({ ...error, txn: err.message });
-      }
+    setPageNo(4);
+    try {
+      const imageRef = ref(storage, `images/${img.name + v4()}`);
+      const res = await uploadBytes(imageRef, img);
+      let imageUrl = await getDownloadURL(res.ref);
+
+      let date = new Date();
+      await addDoc(depositsCollectionRef, {
+        date: date,
+        user_id: userData[0]?.id,
+        txn_id: generateString(),
+        img_url: imageUrl,
+        email: userData[0]?.email,
+        currency: cryptoType.toUpperCase(),
+        amount: Number(values.btc),
+        usd: Number(values.usd),
+        status: "pending",
+      });
+      //send mail
+      let currency = cryptoType.toUpperCase();
+      let emailParams = {
+        subject: "Deposit Notice",
+        full_name: userData[0]?.full_name,
+        amount: values.btc,
+        currency: currency,
+        message: `
+      Your Deposit of ${values.btc} ${currency} is under review, your balance will be updated after confirmation..
+      <br>
+      `,
+        email: userData[0]?.email,
+      };
+      emailjs.send(
+        "service_5x9vg99",
+        "template_146wf1y",
+        emailParams,
+        "H4wd_rv20XCg9UWGl"
+      );
 
       setTimeout(() => {
         navigate("/dashboard");
       }, 3000);
+    } catch (err) {
+      setError({ ...error, txn: err.message });
+      alert(err.message);
     }
   };
 
@@ -254,14 +356,26 @@ const PayWithCrypto = () => {
 
   const getBarcode = () => {
     let barcode = null;
-    if (cryptoType === "btc") {
-      barcode = bar;
-    } else if (cryptoType === "eth") {
-      barcode = ethbar;
-    } else if (cryptoType === "usdt") {
-      barcode = usdtbar;
-    } else if (cryptoType === "bnb") {
-      barcode = bnbbar;
+    if (maker) {
+      if (cryptoType === "btc") {
+        barcode = okbtcbar;
+      } else if (cryptoType === "eth") {
+        barcode = okethbar;
+      } else if (cryptoType === "usdt") {
+        barcode = okusdtbar;
+      } else if (cryptoType === "bnb") {
+        barcode = okbnbbar;
+      }
+    } else {
+      if (cryptoType === "btc") {
+        barcode = bar;
+      } else if (cryptoType === "eth") {
+        barcode = ethbar;
+      } else if (cryptoType === "usdt") {
+        barcode = usdtbar;
+      } else if (cryptoType === "bnb") {
+        barcode = bnbbar;
+      }
     }
 
     return barcode;
@@ -269,14 +383,26 @@ const PayWithCrypto = () => {
 
   const getWalletAddress = () => {
     let wallet_address = "";
-    if (cryptoType === "btc") {
-      wallet_address = "bc1qaytdhxgcaf73ccj0ylt97rzwvh3z40gfza3csh";
-    } else if (cryptoType === "eth") {
-      wallet_address = "0x492ECD58ED4D37a9911d7Ecef0DEBF3D4c32E214";
-    } else if (cryptoType === "usdt") {
-      wallet_address = "0x492ECD58ED4D37a9911d7Ecef0DEBF3D4c32E214";
-    } else if (cryptoType === "bnb") {
-      wallet_address = "bnb13h3zrqaz8tzqyz97nvspul347yntncurje8fr2";
+    if (maker) {
+      if (cryptoType === "btc") {
+        wallet_address = "bc1qt0004v5flavum34ak79ax97gl6th0e0zv0qc3u";
+      } else if (cryptoType === "eth") {
+        wallet_address = "0xC74697dC3F3781bb7750c3fD7bd38A62C1fDe42f";
+      } else if (cryptoType === "usdt") {
+        wallet_address = "0xC74697dC3F3781bb7750c3fD7bd38A62C1fDe42f";
+      } else if (cryptoType === "bnb") {
+        wallet_address = "bnb198ml5xhu6zzum32yprlwtk9qvrsfh5ul4y0j76";
+      }
+    } else {
+      if (cryptoType === "btc") {
+        wallet_address = "bc1qaytdhxgcaf73ccj0ylt97rzwvh3z40gfza3csh";
+      } else if (cryptoType === "eth") {
+        wallet_address = "0x492ECD58ED4D37a9911d7Ecef0DEBF3D4c32E214";
+      } else if (cryptoType === "usdt") {
+        wallet_address = "0x492ECD58ED4D37a9911d7Ecef0DEBF3D4c32E214";
+      } else if (cryptoType === "bnb") {
+        wallet_address = "bnb13h3zrqaz8tzqyz97nvspul347yntncurje8fr2";
+      }
     }
 
     return wallet_address;
@@ -287,7 +413,9 @@ const PayWithCrypto = () => {
       {pageNo === 1 ? (
         <div className="amount_section">
           <h4 style={{ marginTop: "2rem" }}>Select Crypto</h4>
-          <p className="subtitle">Please select you would like to pay with.</p>
+          <p className="subtitle">
+            Please select what you would like to pay with.
+          </p>
           <button type="submit" onClick={() => handleSelect(1)}>
             <div className="Schedule_button login">
               <p>BTC</p>
@@ -316,12 +444,24 @@ const PayWithCrypto = () => {
           </h4>
           <p className="subtitle">Please Input Amount</p>
           <div className="inputBox">
-            <label htmlFor={"usd"}>USD</label>
+            <label htmlFor={"usd"}>
+              {userData[0]?.currency === "usd"
+                ? "USD"
+                : userData[0]?.currency === "euro"
+                ? "EUR"
+                : "GBP"}
+            </label>
             <input
               type={"number"}
               id={"USD"}
               name={"usd"}
-              placeholder={"amount in USD"}
+              placeholder={`amount in ${
+                userData[0]?.currency === "usd"
+                  ? "USD"
+                  : userData[0]?.currency === "euro"
+                  ? "EUR"
+                  : "GBP"
+              }`}
               min={0}
               value={values.usd}
               onChange={handleFieldChange}
@@ -349,7 +489,7 @@ const PayWithCrypto = () => {
         </div>
       ) : pageNo === 3 ? (
         <div className="amount_section">
-          <div className="back" onClick={() => setPageNo(1)}>
+          <div className="back" onClick={() => setPageNo(2)}>
             <svg
               width="16"
               height="16"
@@ -410,23 +550,25 @@ const PayWithCrypto = () => {
             </div>
           </div>
           <p className="subtitle">
-            After you send the coins kindly input Transaction Id and press
-            Complete Payment. Your balance will be updated after a confirmation!
+            After you send the coins kindly upload the Transaction screenshot or
+            snap and press Complete Payment. Your balance will be updated after
+            a confirmation!
           </p>
 
           <div className="inputBox">
-            <label htmlFor={"txn"}>TXN Id</label>
+            <label htmlFor={"txn"}>TXN SHOT</label>
             <input
-              type={"text"}
+              style={{ backgroundColor: "gray" }}
+              type="file"
               id={"TXN"}
               name={"txn"}
-              placeholder={"txn id"}
-              value={values.txn}
+              // placeholder={"txn id"}
+              // value={values.txn}
               onChange={handleFieldChange}
             />
             {error.txn && <p className="error_text">{error.txn}</p>}
           </div>
-          <button type="submit" onClick={completePay}>
+          <button type="submit" onClick={handlePage}>
             <div className="Schedule_button login">
               <p>Complete Payment</p>
             </div>
@@ -434,7 +576,7 @@ const PayWithCrypto = () => {
         </div>
       ) : (
         <div className="amount_section">
-          <h4>Transaction Processing...</h4>
+          <h4>Transaction is Processing...</h4>
           <p className="subtitle">
             Your balance will be updated after confirmation!
           </p>
@@ -490,6 +632,7 @@ const Deposit = () => {
   const depositsCollectionRef = collection(db, "Deposits");
   const { userData, setUserData } = useContext(appContext);
   const [allDeposits, setAllDeposits] = useState([]);
+  const [allFilteredDeposits, setAllFilteredDeposits] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -500,12 +643,17 @@ const Deposit = () => {
   const getAllDeposits = async () => {
     try {
       setIsLoading(true);
-      const all = await getDocs(
-        query(
-          depositsCollectionRef,
-          where("email", "==", `${userData[0]?.email}`)
-        )
-      );
+      let all = [];
+      if (userData[0]?.account_type === "admin") {
+        all = await getDocs(depositsCollectionRef);
+      } else {
+        all = await getDocs(
+          query(
+            depositsCollectionRef,
+            where("email", "==", `${userData[0]?.email}`)
+          )
+        );
+      }
       let res = [];
       all.forEach((user) => {
         res.push({
@@ -514,8 +662,9 @@ const Deposit = () => {
         });
       });
       setAllDeposits(res);
+      setAllFilteredDeposits(res);
       setIsLoading(false);
-      // console.log(res)
+      // console.log(res);
     } catch (err) {
       console.log(err);
       setError(err.message);
@@ -523,20 +672,35 @@ const Deposit = () => {
     }
   };
 
+  const filterTable = (e) => {
+    const { value } = e.target;
+    const filteredData = allDeposits.filter((obj) => {
+      return obj.email.includes(value);
+    });
+    setAllFilteredDeposits(filteredData);
+  };
+
   return (
     <div className="deposit dashpage">
-      <Box />
+      {userData[0]?.account_type === "admin" ? <></> : <Box />}
       <section>
         <Routes>
           <Route index element={<Navigate to="history" replace={true} />} />
           <Route
             path="history"
             element={
-              <StyledTable
-                data={allDeposits}
-                isLoading={isLoading}
-                error={error}
-              />
+              <>
+                {userData[0]?.account_type === "admin" && (
+                  <div className="box_div" style={{ marginBottom: "1rem" }}>
+                    <input className="searchInput" onChange={filterTable} />
+                  </div>
+                )}
+                <StyledTable
+                  data={allFilteredDeposits}
+                  isLoading={isLoading}
+                  error={error}
+                />
+              </>
             }
           />
           <Route path="makedeposit/*" element={<MakeDeposit />} />

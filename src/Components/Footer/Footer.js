@@ -33,9 +33,9 @@ export default function Footer() {
               <div className="socials">
                 <div className="footer_btn">
                   {/* <a href="mailto:accountcenter@xtbmarket.io?subject=Hello%20Rebbon%20Tech&body=My%20name%20is"> */}
-                  <a href="mailto:accountcenter@xtbmarket.io?subject=Hello%XTB%20Market&body=I%20">
+                  <a href="mailto:xtbmarketio@gmail.com?subject=Hello%20XTB%20Market&body=I%20">
                     <div className="socials_btn">
-                      <p className="btn_text">hello@xtbmarket.io</p>
+                      <p className="btn_text">hello@xtbmarket.co</p>
                     </div>
                   </a>
                 </div>
@@ -51,7 +51,7 @@ export default function Footer() {
 
             <div className="flex rights_and_privacy">
               <p>
-                © XTB Market.Co 2023. All rights reserved. <p>Privacy policy</p>
+                © XTB Market.co 2023. All rights reserved. <p>Privacy policy</p>
                 <p>For Enquires: +44 7418372824</p>
               </p>
             </div>

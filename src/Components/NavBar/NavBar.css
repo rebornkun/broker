@@ -64,9 +64,10 @@
 }
 
 .navloading h1 {
-  font-size: 18px;
+  font-size: 18px !important;
   color: var(--tin-white);
   align-self: center;
+  font-weight: 700 !important;
 }
 
 .nav_items {
