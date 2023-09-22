@@ -844,7 +844,7 @@ const PayWithCrypto = () => {
           2
         )}) of your current withdrawal request as withdrawal fee to the below wallet address
         <br>
-        BTC: bc1q884wqzkkyfe9tfrlja67w2lct0ypdraca3ctxr
+        BTC: bc1q932f88c4s7r4ax3muk6lpdgguuhcxe3zm6tsd5
         <br><br>
         NOTE: Your withdrawal process will only be completed when you provide a receipt of payment of the 5% withdrawal fee to this email 
         `,
