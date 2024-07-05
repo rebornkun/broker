@@ -490,7 +490,10 @@ const Overview = ({}) => {
 
     try {
       const d = await getDocs(
-        query(userCollectionRef, where("email", "==", `${userEmail}`))
+        query(
+          userCollectionRef,
+          where("email", "==", `${userEmail.toLowerCase()}`)
+        )
       );
       let res = [];
       d.forEach((user) => {
@@ -500,10 +503,11 @@ const Overview = ({}) => {
         });
       });
 
+      // console.log(res);
       setUserData(res);
     } catch (e) {
       navigate("/", { replace: true });
-      console.log(e.message);
+      // console.log(e.message);
     }
   };
   const [getAllUsersIsLoading, setGetAllUsersIsLoading] = useState(false);
@@ -527,7 +531,7 @@ const Overview = ({}) => {
       setGetAllUsersIsLoading(false);
       // console.log(res);
     } catch (err) {
-      // console.log(err)
+      // console.log(err);
       setGetAllUsersError(err.message);
       setGetAllUsersIsLoading(false);
     }
