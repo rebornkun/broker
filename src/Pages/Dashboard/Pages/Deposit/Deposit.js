@@ -305,6 +305,7 @@ const PayWithCrypto = () => {
       let imageUrl = await getDownloadURL(res.ref);
 
       let date = new Date();
+      console.log(userData[0]);
       await addDoc(depositsCollectionRef, {
         date: date,
         user_id: userData[0]?.id,

@@ -55,7 +55,10 @@ function App() {
     const userEmail = JSON.parse(userD).email;
     try {
       const d = await getDocs(
-        query(userCollectionRef, where("email", "==", `${userEmail}`))
+        query(
+          userCollectionRef,
+          where("email", "==", `${userEmail.toLowerCase()}`)
+        )
       );
       let res = [];
       console.log(d);
