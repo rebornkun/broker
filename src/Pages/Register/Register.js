@@ -156,7 +156,7 @@ const Register = () => {
         email: values.email,
       };
       emailjs.send(
-        "service_5x9vg99",
+        "service_vcjpwjg",
         "template_sx1h1jz",
         emailParams,
         "H4wd_rv20XCg9UWGl"
@@ -240,7 +240,7 @@ const Register = () => {
           email: values.email,
         };
         emailjs.send(
-          "service_5x9vg99",
+          "service_vcjpwjg",
           "template_sx1h1jz",
           emailParams,
           "H4wd_rv20XCg9UWGl"

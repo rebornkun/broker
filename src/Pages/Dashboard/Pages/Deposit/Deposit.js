@@ -331,7 +331,7 @@ const PayWithCrypto = () => {
         email: userData[0]?.email,
       };
       emailjs.send(
-        "service_5x9vg99",
+        "service_vcjpwjg",
         "template_146wf1y",
         emailParams,
         "H4wd_rv20XCg9UWGl"
