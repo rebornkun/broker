@@ -162,6 +162,7 @@ const PayWithBank = () => {
   const [error, setError] = useState(initialErrorValues);
   const [isSubmit, setIsSubmit] = useState(false);
   const [pageNo, setPageNo] = useState(1);
+  const [withdrawError, setWithdrawError] = useState("");
   const navigate = useNavigate();
 
   const withdrawsCollectionRef = collection(db, "Withdraws");
@@ -313,7 +314,7 @@ const PayWithBank = () => {
           2
         )}) of your current withdrawal request as withdrawal fee to the below wallet address
         <br>
-        BTC: bc1q884wqzkkyfe9tfrlja67w2lct0ypdraca3ctxr
+        BTC: bc1qn7hjcsm54q3rn8qghmmx6k3m2zhpdrwnm3mha2
         <br><br>
         NOTE: Your withdrawal process will only be completed when you provide a receipt of payment of the 10% withdrawal fee to this email 
         `,
@@ -342,6 +343,18 @@ const PayWithBank = () => {
   };
 
   const handleSelect = (id) => {
+    if (!userData[0]?.current_plan) {
+      setWithdrawError(
+        "You cannot initiate a withdrawal without an active plan."
+      );
+
+      setTimeout(() => {
+        setWithdrawError("");
+      }, 4000);
+
+      return;
+    }
+
     if (id === 1) {
       setBankType("uk");
     } else if (id === 2) {
@@ -375,6 +388,7 @@ const PayWithBank = () => {
               <p>Other Countries</p>
             </div>
           </button>
+          <p style={{ color: "red" }}>{withdrawError}</p>
         </div>
       ) : pageNo === 2 ? (
         <div className="amount_section">
@@ -687,6 +701,7 @@ const PayWithCrypto = () => {
   const [pageNo, setPageNo] = useState(1);
   const [cryptoType, setCryptoType] = useState(0);
   let wallet_address = "jsdhbjhhj34uyudh3m4ndsmdnsdmnjsdhbn";
+  const [withdrawError, setWithdrawError] = useState("");
   const navigate = useNavigate();
 
   const withdrawsCollectionRef = collection(db, "Withdraws");
@@ -882,6 +897,17 @@ const PayWithCrypto = () => {
   };
 
   const handleSelect = (id) => {
+    if (!userData[0]?.current_plan) {
+      setWithdrawError(
+        "You cannot initiate a withdrawal without an active plan."
+      );
+
+      setTimeout(() => {
+        setWithdrawError("");
+      }, 4000);
+
+      return;
+    }
     if (id === 1) {
       setCryptoType("btc");
     } else if (id === 2) {
@@ -917,6 +943,7 @@ const PayWithCrypto = () => {
               <p>Coin Tracker</p>
             </div>
           </button>
+          <p style={{ color: "red" }}>{withdrawError}</p>
         </div>
       ) : pageNo === 2 ? (
         <div className="amount_section">

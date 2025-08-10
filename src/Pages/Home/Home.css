@@ -332,6 +332,7 @@
 .curveOne svg path {
   animation: changecurve 10s linear infinite;
   animation-delay: 10s;
+  -webkit-animation: changecurve 10s linear infinite;
 }
 
 .define {
@@ -341,12 +342,14 @@
 }
 .curveTwo {
   height: 75px;
-  /* width: 100px; */
+  /*width: 100px;
+  */
   position: absolute;
   top: 155px;
   left: 155px;
   animation: changecurve 1s linear infinite;
   animation-delay: 10s;
+  -webkit-animation: changecurve 1s linear infinite;
 }
 
 .design {
