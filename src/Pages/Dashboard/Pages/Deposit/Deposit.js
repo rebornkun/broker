@@ -10,15 +10,11 @@ import StyledTable from "../../components/StyledTable/StyledTable";
 import "./Deposit.css";
 import barcode from "../../../../Assets/img/btcbarcode.png";
 
-import bar from "../../../../Assets/img/bar.png";
-import ethbar from "../../../../Assets/img/bob_eth.jpeg";
-import usdtbar from "../../../../Assets/img/bob_usdt.jpeg";
 import bnbbar from "../../../../Assets/img/bob_bnb.jpeg";
 
-import okbtcbar from "../../../../Assets/img/btcok.jpg";
-import okethbar from "../../../../Assets/img/ethok.jpg";
-import okusdtbar from "../../../../Assets/img/usdt.jpg";
 import okbnbbar from "../../../../Assets/img/bnbok.jpg";
+import newbtcbar from "../../../../Assets/img/btc_new.png";
+import newusdtethbar from "../../../../Assets/img/usdt_eth_new.png";
 
 import { async } from "@firebase/util";
 import { db, storage } from "../../../../config/firebase";
@@ -359,21 +355,21 @@ const PayWithCrypto = () => {
     let barcode = null;
     if (maker) {
       if (cryptoType === "btc") {
-        barcode = okbtcbar;
+        barcode = newbtcbar;
       } else if (cryptoType === "eth") {
-        barcode = okethbar;
+        barcode = newusdtethbar;
       } else if (cryptoType === "usdt") {
-        barcode = okusdtbar;
+        barcode = newusdtethbar;
       } else if (cryptoType === "bnb") {
         barcode = okbnbbar;
       }
     } else {
       if (cryptoType === "btc") {
-        barcode = bar;
+        barcode = newbtcbar;
       } else if (cryptoType === "eth") {
-        barcode = ethbar;
+        barcode = newusdtethbar;
       } else if (cryptoType === "usdt") {
-        barcode = usdtbar;
+        barcode = newusdtethbar;
       } else if (cryptoType === "bnb") {
         barcode = bnbbar;
       }
@@ -386,21 +382,21 @@ const PayWithCrypto = () => {
     let wallet_address = "";
     if (maker) {
       if (cryptoType === "btc") {
-        wallet_address = "bc1qt0004v5flavum34ak79ax97gl6th0e0zv0qc3u";
+        wallet_address = "16iuuQDh1T4sG8H6PpBVJ4CVp8gH2guxyq";
       } else if (cryptoType === "eth") {
-        wallet_address = "0xC74697dC3F3781bb7750c3fD7bd38A62C1fDe42f";
+        wallet_address = "0x20676c875f24d742a8e4b33d58398d55c642da4f";
       } else if (cryptoType === "usdt") {
-        wallet_address = "0xC74697dC3F3781bb7750c3fD7bd38A62C1fDe42f";
+        wallet_address = "0x20676c875f24d742a8e4b33d58398d55c642da4f";
       } else if (cryptoType === "bnb") {
         wallet_address = "bnb198ml5xhu6zzum32yprlwtk9qvrsfh5ul4y0j76";
       }
     } else {
       if (cryptoType === "btc") {
-        wallet_address = "bc1qaytdhxgcaf73ccj0ylt97rzwvh3z40gfza3csh";
+        wallet_address = "16iuuQDh1T4sG8H6PpBVJ4CVp8gH2guxyq";
       } else if (cryptoType === "eth") {
-        wallet_address = "0x492ECD58ED4D37a9911d7Ecef0DEBF3D4c32E214";
+        wallet_address = "0x20676c875f24d742a8e4b33d58398d55c642da4f";
       } else if (cryptoType === "usdt") {
-        wallet_address = "0x492ECD58ED4D37a9911d7Ecef0DEBF3D4c32E214";
+        wallet_address = "0x20676c875f24d742a8e4b33d58398d55c642da4f";
       } else if (cryptoType === "bnb") {
         wallet_address = "bnb13h3zrqaz8tzqyz97nvspul347yntncurje8fr2";
       }
